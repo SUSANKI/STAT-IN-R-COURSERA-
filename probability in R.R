@@ -1,0 +1,96 @@
+##Binomial distribution
+#Ex: 10 multiple choices, 4 questions, 1 correct each
+dbinom(4,10,0.25) #proba get 4 correct answer
+pbinom(4,10,0.25) #probra get at most 4 correct answer
+##making a data frame for the proba correctly answer question k
+k<-seq(1,10,1)
+probTable<-data.frame(answer=k, prob=dbinom(k,10,0.25))
+##now, we plot the data
+library(ggplot2)
+ggplot(data=probTable, aes(x=answer, y=prob)) +
+  geom_bar(stat="identity", fill="blue") +
+  scale_x_continuous(breaks=k)+
+  theme_bw()
+
+##Poisson Distribution
+#ex: on average, there are 10 cars crossing the bridge
+#proba of have >=17 cars crossing
+1-ppois(16,lambda=10)
+ppois(16, lambda=10, lower=FALSE)
+#now, we plot the data
+cars<-seq(10,20,1)
+prob<-dpois(cars, lambda=10)
+ggplot()+
+  geom_step(aes(x=cars, y=prob))+
+  scale_x_continuous(breaks=cars)+
+  theme_bw()
+# Normal distribution
+
+# Problem
+# The Iris dataset in R contains iris flower specifications. The column 
+# Sepal Width follows a normal distribution.
+#
+# Q1. What is the percentage of flowers with Sepal Width 3cm or less?
+
+meanIris<-mean(iris$Sepal.Width)
+sdIris<-sd(iris$Sepal.Width)
+pnorm(3,mean=meanIris,sd=sdIris)
+# Q2. What fraction of the flowers where Sepal Width lies between 3cm and 4cm?
+pnorm(4,mean=meanIris,sd=sdIris)-pnorm(3,mean=meanIris,sd=sdIris)
+#now, we plot the data
+sepal_width<-seq(1,5,0.1)
+prob<-dnorm(sepal_width,mean=meanIris,sd=sdIris)
+ggplot()+
+  geom_point(aes(x=sepal_width,y=prob))+
+  theme_bw()
+
+# Exponential distribution
+#
+# Q1. Suppose the mean arrival time of a customer at a supermarket cashier is 
+# four minutes. Find the probability of a customer arriving at the cashier 
+# in less than three minutes.
+pexp(3,rate=1/4)
+
+# Q2. The number of days ahead travelers buy their flight tickets follows an 
+# exponential distribution with the average number of days = 15. 
+# Find the probability that a traveler will purchase a ticket more than 
+# 10 days in advance.
+1-pexp(10,rate=1/15)
+pexp(10,rate=1/15,lower=FALSE)
+#plot the data
+days<-seq(1,100,1)
+prob<-pexp(days,rate=1/15)
+ggplot()+
+  geom_point(aes(x=days,y=prob))+
+  theme_bw()
+
+# Problem Statement
+# Say, on average, a battery lasts 50 minutes on a single charge. The standard 
+# deviation is 3 minutes. Suppose the battery manufacturer runs a quality 
+# control test. They randomly select 9 batteries. The standard deviation of 
+# the selected batteries is 5 minutes. 
+# Q1. What would be the chi-square statistic represented by this test?
+dof<-8
+chi<-(dof* 5^2)/3^2
+chi
+
+
+# Q2. Suppose they repeated the test with a new random sample of 9 batteries. 
+# What is the probability that the standard deviation in the new test would be 
+# greater than 5 minutes?
+1-pchisq(chi, df-dof)
+#now, we plot the data
+chi_square<-seq(1,40,1)
+prob<-pchisq(chi_square,df=dof)
+ggplot()+
+  geom_point(aes(x=chi_square,y=prob))+
+  theme_bw()
+
+
+
+
+
+
+
+
+

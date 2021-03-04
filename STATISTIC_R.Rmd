@@ -1,0 +1,95 @@
+---
+title: 'R INSTRUCTION: R COMMAND FOR SUMMARIZING DATAS'
+author: "NGUYEN NGOC PHUNG"
+date: "9/24/2020"
+output: html_document
+---
+
+```{r}
+#The following commands will generate plots of the data and summary statistics:
+#1. Enter data into R:
+x <- c(2, 6, 8, 12, 219, 30, 0, 25, 7, 16, 23, 38, 229, 35, 1, 228)
+y <- c(9, 2, 24, 42, 9, 23, 23, 26, 5, 22, 214, 51, 65, 3, 216, 23)
+```
+
+### MEAN, MEDIAN
+2. Mean: mean(x)
+3. Median: median(x)
+
+```{r}
+mean(x)
+median(x)
+```
+
+### HISTOGRAM, STEM AND LEAF, ORDERED DATA
+4. Histogram: hist(x)
+5. Stem-and-leaf plot: stem(x)
+6. Ordered data: sort(x)
+```{r}
+#for example, I want bin=10, name of histogram is GOOD DAY
+hist(x, breaks=23, main="GOOD DAY")
+stem(x)
+sort(x)
+```
+
+### PERCENTILE
+ For example, calculate 60 percentile: quantile(x,0.6)
++ Another example: List 10, 20, · · · , 90, 100 percentile: quantile(x, seq(0, l, .l))
+```{r}
+quantile(x,0.6)
+quantile(x,seq(0,1,0.1))
+```
+
+### QUARTILE
+ Quantiles at, for example, p = .1, .34, .68, .93:
+```{r}
+p = c(.1, .34, .68, .93)
+quantile (x, p)
+```
+
+### INTERQUARTILE RANGE
+ Interquartile range: IQR(x)
+```{r}
+IQR(x)
+```
+
+### VARIANCE,STANDARD DEVIATION AND CORRELATION
+ Variance: var(x)
+```{r}
+var(x)
+```
+
+ Standard deviation: sd(x)
+```{r}
+sd(x)
+```
+
+Correlation: cor(x, y)
+```{r}
+cor(x, y)
+```
+
+### BOXPLOT, SCATTERPLOT
+12. Boxplot: boxplot(x)
+```{r}
+boxplot(x)
+```
+
+13. Scatterplot: plot(x, y)
+```{r}
+plot(x, y)
+```
+
+ 
+### LEAST SQUARE METHOD
+```{r}
+lm(x~y)
+#I first plot x and y
+plot(x,y)
+#assign it to PHUNG
+PHUNG<-lm(x~y)
+#show regression line to plot
+abline(PHUNG)
+```
+
+### THE END @-@
